@@ -23,13 +23,14 @@ sudoku(A1, A2, A3, A4, B1, B2, B3, B4, C1, C2, C3, C4, D1, D2, D3, D4) :-
 
     labeling([], Vars),
 
-    printRow(A1, A2, A3, A4),
-    printRow(B1, B2, B3, B4),
-    printRow(C1, C2, C3, C4),
-    printRow(D1, D2, D3, D4).
+    printRow([A1, A2, A3, A4]),
+    printRow([B1, B2, B3, B4]),
+    printRow([C1, C2, C3, C4]),
+    printRow([D1, D2, D3, D4]).
 
-printRow(A, B, C, D) :-
-    write('|'), write(A),
-    write('|'), write(B),
-    write('|'), write(C),
-    write('|'), write(D), nl.
+printRow([]) :-
+    nl.
+printRow([H|T]) :-
+    write('|'),
+    write(H),
+    printRow(T).
