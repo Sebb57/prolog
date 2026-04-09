@@ -12,11 +12,8 @@ sudoku(Rows) :-
     maplist(assign_vals, Rows),
 
     maplist(all_distinct, Rows),
-
-    all_distinct([A1,B1,C1,D1]),
-    all_distinct([A2,B2,C2,D2]),
-    all_distinct([A3,B3,C3,D3]),
-    all_distinct([A4,B4,C4,D4]),
+    transpose(Rows, Cols),
+    maplist(all_distinct, Cols),
 
     append(Rows, Vars),
     labeling([], Vars),
