@@ -11,10 +11,7 @@ sudoku(Rows) :-
     
     maplist(assign_vals, Rows),
 
-    all_distinct([A1,A2,A3,A4]),
-    all_distinct([B1,B2,B3,B4]),
-    all_distinct([C1,C2,C3,C4]),
-    all_distinct([D1,D2,D3,D4]),
+    maplist(all_distinct, Rows),
 
     all_distinct([A1,B1,C1,D1]),
     all_distinct([A2,B2,C2,D2]),
