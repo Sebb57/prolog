@@ -22,11 +22,30 @@ sudoku(Rows) :-
     maplist(all_distinct, Rows),
     transpose(Rows, Cols),
     maplist(all_distinct, Cols),
+    B is floor(sqrt(N)),
+    squares(B, Rows),
 
     labeling([], Vars),
 
     maplist(printRow, Rows).
 
+squares(_, []).
+squares(B, Rows) :-
+    take(B, Rows, Group, RestRows),
+    square_groups(B, Group),
+    squares(B, RestRows).
+
+square_groups(_, Rows) :-
+    maplist(=([]), Rows).
+square_groups(B, Rows) :-
+    maplist(take(B), Rows, Prefixes, RestRows),
+    append(Prefixes, Square),
+    all_distinct(Square),
+    square_groups(B, RestRows).
+
+take(N, List, Front, Back) :-
+    length(Front, N),
+    append(Front, Back, List).
 
 printRow([]) :-
     nl.
